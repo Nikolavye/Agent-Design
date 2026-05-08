@@ -1,0 +1,41 @@
+[project]
+name = "evidence-brief-agent"
+version = "0.1.0"
+description = "A small planner-executor evidence brief agent with PDF RAG, browser tools, and transparent logs."
+requires-python = ">=3.11"
+dependencies = [
+  "fastapi>=0.116.0",
+  "uvicorn[standard]>=0.35.0",
+  "httpx>=0.28.0",
+  "beautifulsoup4>=4.13.0",
+  "pypdf>=5.7.0",
+  "python-multipart>=0.0.20",
+  "openai>=1.93.0",
+]
+
+[project.optional-dependencies]
+dev = [
+  "pytest>=8.0.0",
+  "ruff>=0.6.0",
+]
+
+[project.scripts]
+evidence-agent = "evidence_agent.__main__:main"
+
+[tool.setuptools]
+package-dir = {"" = "src"}
+
+[tool.setuptools.packages.find]
+where = ["src"]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+addopts = ["--basetemp=.pytest-tmp"]
+
+[tool.ruff]
+line-length = 120
+target-version = "py311"
+
+[tool.ruff.lint]
+select = ["E", "F", "W", "I", "B", "UP"]
+ignore = ["E501"]
